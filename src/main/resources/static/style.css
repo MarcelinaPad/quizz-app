@@ -1,0 +1,71 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('quiz-7563812_1280.png'); /* Wstawienie obrazu tła */
+    background-size: cover; /* Dopasowanie obrazu do całej strony */
+    background-position: center center; /* Wyrównanie obrazu w centrum */
+    background-attachment: fixed; /* Tło będzie nieruchome podczas przewijania */
+    filter: blur(0px); /* Rozmycie tła */
+}
+
+/* Nagłówki */
+h2 {
+    color: #333;
+    text-align: center;
+    margin-top: 50px;
+}
+
+/* Formularz logowania */
+form {
+    background-color: rgba(255, 255, 255, 0.9); /* Ustawienie półprzezroczystego tła dla formularza */
+    padding: 20px;
+    width: 300px;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative; /* Aby formularz był nad rozmytym tłem */
+    z-index: 1; /* Zapewnia, że formularz będzie widoczny ponad rozmytym tłem */
+}
+
+form input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+/* Lista quizów */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 30px;
+}
+
+ul li {
+    background-color: #fff;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+ul li:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}

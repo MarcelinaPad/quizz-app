@@ -5,11 +5,11 @@ services:
     image: mysql:8
     container_name: mysql_container
     ports:
-      - "3307:3306"  # Mapuje port 3306 w kontenerze na port 3307 na hoście
+      - "3307:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: root  # Ustawia hasło dla użytkownika root
+      MYSQL_ROOT_PASSWORD: root
     volumes:
-      - mysql_data:/var/lib/mysql  # Persisting MySQL data
+      - mysql_data:/var/lib/mysql
 
 volumes:
   mysql_data:

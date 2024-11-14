@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css"> <!-- Podłączenie pliku CSS -->
+</head>
+<body>
+<h2>Login</h2>
+<form id="loginForm">
+    <input type="text" id="username" placeholder="Username" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button type="submit">Login</button>
+</form>
+
+<script>
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        fetch("http://localhost:8080/api/users/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ name: username, password: password }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log("User created:", data);
+                alert("The user created!");
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("Error.");
+            });
+    });
+</script>
+
+<h2>Lista Quizów</h2>
+<ul id="quizList"></ul>
+
+<script>
+    fetch("http://localhost:8080/api/quizzes")
+        .then(response => response.json())
+        .then(quizzes => {
+            const quizList = document.getElementById("quizList");
+            quizzes.forEach(quiz => {
+                const li = document.createElement("li");
+                li.textContent = quiz.quizName;
+                quizList.appendChild(li);
+            });
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("We have some problem with quiz loading");
+        });
+</script>
+</body>
+</html>
