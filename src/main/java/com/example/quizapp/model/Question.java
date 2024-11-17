@@ -9,6 +9,17 @@ public class Question {
     private Long id;
     private String questionText;
     private String correctAnswer;
+    @ManyToOne
+    @JoinColumn(name = "quiz_id", nullable = false)
+    private Quiz quiz;
+
+    public Quiz getQuiz() {
+        return quiz;
+    }
+
+    public void setQuiz(Quiz quiz) {
+        this.quiz = quiz;
+    }
 
     public Long getId() {
         return id;

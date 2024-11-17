@@ -36,13 +36,13 @@ public class Quiz {
         this.description = description;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "quiz_id")
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Question> questions;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
 
     public User getUser() {
         return user;

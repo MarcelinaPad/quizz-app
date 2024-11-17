@@ -1,5 +1,7 @@
 package com.example.quizapp.controller;
 
+import com.example.quizapp.dto.QuizResponse;
+import com.example.quizapp.mapper.QuizMapper;
 import com.example.quizapp.model.Question;
 import com.example.quizapp.model.Quiz;
 import com.example.quizapp.service.QuizService;
@@ -29,10 +31,11 @@ public class QuizController {
     }
 
     @PostMapping
-    public ResponseEntity<Quiz> createQuiz(@RequestBody Quiz quiz) {
+    public ResponseEntity<QuizResponse> createQuiz(@RequestBody Quiz quiz) {
         List<Question> questions = quiz.getQuestions();
         Quiz createdQuiz = quizService.createQuiz(quiz.getQuizName(), quiz.getDescription(), questions );
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdQuiz);
+        QuizResponse quizResponse = QuizMapper.mapToQuizResponse(createdQuiz);
+        return ResponseEntity.status(HttpStatus.CREATED).body(quizResponse);
     }
     @PutMapping("/{quizId}")
     public ResponseEntity<Quiz> updateQuiz(@PathVariable Long quizId, @RequestBody Quiz quizDetails) {
