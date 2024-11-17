@@ -4,6 +4,8 @@ import com.example.quizapp.model.Question;
 import com.example.quizapp.model.Quiz;
 import com.example.quizapp.repository.QuizRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,6 +37,9 @@ public class QuizService {
         Quiz quiz = quizRepository.findById(quizId)
                 .orElseThrow(() -> new IllegalArgumentException("Quiz not found"));
         quizRepository.delete(quiz);
+    }
+    public Page<Quiz> getAllQuizzes(Pageable pageable) {
+        return quizRepository.findAll(pageable);
     }
 
     public List<Quiz> getAllQuizzes() {

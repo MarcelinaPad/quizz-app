@@ -4,6 +4,8 @@ import com.example.quizapp.model.Question;
 import com.example.quizapp.model.Quiz;
 import com.example.quizapp.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,11 @@ public class QuizController {
         return quizService.getAllQuizzes();
     }
 
+    @GetMapping("/page")
+    public Page<Quiz> getAllQuizzes(Pageable pageable) {
+        return quizService.getAllQuizzes(pageable);
+    }
+
     @PostMapping
     public ResponseEntity<Quiz> createQuiz(@RequestBody Quiz quiz) {
         List<Question> questions = quiz.getQuestions();
@@ -32,6 +39,9 @@ public class QuizController {
         Quiz updatedQuiz = quizService.updateQuiz(quizId, quizDetails);
         return ResponseEntity.ok(updatedQuiz);
     }
-    @DeleteMapping("/{quizId")
-    public ResponseEntity<Void> deleteQuiz(@PathVariable Long quizId)
+    @DeleteMapping("/{quizId}")
+    public ResponseEntity<Void> deleteQuiz(@PathVariable Long quizId) {
+        quizService.deleteQuiz(quizId);
+        return ResponseEntity.noContent().build();
+    }
 }

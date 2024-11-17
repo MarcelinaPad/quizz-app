@@ -20,8 +20,7 @@ public class QuestionController {
     public ResponseEntity<Question> createQuestion(@RequestBody Question question) {
         Question createdQuestion = questionService.createQuestion(
                 question.getQuestionText(),
-                question.getCorrectAnswer(),
-                question.getQuiz()
+                question.getCorrectAnswer()
         );
         return ResponseEntity.status(HttpStatus.CREATED).body(createdQuestion);
     }

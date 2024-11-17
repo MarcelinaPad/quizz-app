@@ -11,11 +11,10 @@ public class QuestionService {
     @Autowired
     private QuestionRepository questionRepository;
 
-    public Question createQuestion(String questionText, String correctAnswer, Quiz quiz) {
+    public Question createQuestion(String questionText, String correctAnswer) {
         Question question = new Question();
         question.setQuestionText(questionText);
         question.setCorrectAnswer(correctAnswer);
-        question.setQuiz(quiz);
         return questionRepository.save(question);
     }
 }

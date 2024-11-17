@@ -22,10 +22,6 @@ public class Question {
         return correctAnswer;
     }
 
-    public Quiz getQuiz() {
-        return quiz;
-    }
-
     public void setId(Long id) {
         this.id = id;
     }
@@ -38,12 +34,5 @@ public class Question {
         this.correctAnswer = correctAnswer;
     }
 
-    public void setQuiz(Quiz quiz) {
-        this.quiz = quiz;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "quiz_id", nullable = false)
-    private Quiz quiz;
 
 }

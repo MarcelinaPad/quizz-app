@@ -36,8 +36,21 @@ public class Quiz {
         this.description = description;
     }
 
-    @OneToMany(mappedBy = "quiz")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "quiz_id")
     private List<Question> questions;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public List<Question> getQuestions() {
         return questions;
