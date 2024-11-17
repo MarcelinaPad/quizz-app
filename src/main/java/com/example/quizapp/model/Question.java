@@ -2,6 +2,8 @@ package com.example.quizapp.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Question {
     @Id
@@ -9,6 +11,12 @@ public class Question {
     private Long id;
     private String questionText;
     private String correctAnswer;
+
+    @ElementCollection
+    @CollectionTable(name = "incorrect_answers", joinColumns = @JoinColumn(name = "question_id"))
+    @Column(name = "incorrect_answer")
+    private List<String> incorrectAnswers;
+
     @ManyToOne
     @JoinColumn(name = "quiz_id", nullable = false)
     private Quiz quiz;
@@ -45,5 +53,11 @@ public class Question {
         this.correctAnswer = correctAnswer;
     }
 
+    public List<String> getIncorrectAnswers() {
+        return incorrectAnswers;
+    }
 
+    public void setIncorrectAnswers(List<String> incorrectAnswers) {
+        this.incorrectAnswers = incorrectAnswers;
+    }
 }

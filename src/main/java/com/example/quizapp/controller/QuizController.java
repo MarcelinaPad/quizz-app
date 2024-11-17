@@ -1,6 +1,7 @@
 package com.example.quizapp.controller;
 
 import com.example.quizapp.dto.QuizResponse;
+import com.example.quizapp.exception.InvalidQuestionException;
 import com.example.quizapp.mapper.QuizMapper;
 import com.example.quizapp.model.Question;
 import com.example.quizapp.model.Quiz;
@@ -33,6 +34,11 @@ public class QuizController {
     @PostMapping
     public ResponseEntity<QuizResponse> createQuiz(@RequestBody Quiz quiz) {
         List<Question> questions = quiz.getQuestions();
+        for (Question question : questions) {
+            if (question.getIncorrectAnswers() == null || question.getIncorrectAnswers().size() != 3) {
+                throw new InvalidQuestionException("Each question must have exactly 3 incorrect answers.");
+            }
+        }
         Quiz createdQuiz = quizService.createQuiz(quiz.getQuizName(), quiz.getDescription(), questions );
         QuizResponse quizResponse = QuizMapper.mapToQuizResponse(createdQuiz);
         return ResponseEntity.status(HttpStatus.CREATED).body(quizResponse);
