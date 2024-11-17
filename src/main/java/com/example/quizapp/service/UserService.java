@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 @Service
 public class UserService {
@@ -13,9 +14,14 @@ public class UserService {
     private UserRepository userRepository;
 
     public User registerUser(String name, String password) {
-        User user = new User("username", "password");
-        user.setName(name);
-        user.setPassword(password);
+        if(password.length() < 8) {
+            throw new IllegalArgumentException("Your password is too short");
+        }
+        String passwordPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#\\$%^&*(),.?\":{}|<>]).{8,}$";
+        if (!Pattern.matches(passwordPattern, password)) {
+            throw new IllegalArgumentException("The password must contain at least one uppercase letter, lowercase letter, number and special character ");
+        }
+        User user = new User(name, password);
         return userRepository.save(user);
     }
 

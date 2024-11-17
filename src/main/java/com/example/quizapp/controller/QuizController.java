@@ -1,5 +1,6 @@
 package com.example.quizapp.controller;
 
+import com.example.quizapp.model.Question;
 import com.example.quizapp.model.Quiz;
 import com.example.quizapp.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,15 @@ public class QuizController {
 
     @PostMapping
     public ResponseEntity<Quiz> createQuiz(@RequestBody Quiz quiz) {
-        Quiz createdQuiz = quizService.createQuiz(quiz.getQuizName(), quiz.getDescription());
+        List<Question> questions = quiz.getQuestions();
+        Quiz createdQuiz = quizService.createQuiz(quiz.getQuizName(), quiz.getDescription(), questions );
         return ResponseEntity.status(HttpStatus.CREATED).body(createdQuiz);
     }
+    @PutMapping("/{quizId}")
+    public ResponseEntity<Quiz> updateQuiz(@PathVariable Long quizId, @RequestBody Quiz quizDetails) {
+        Quiz updatedQuiz = quizService.updateQuiz(quizId, quizDetails);
+        return ResponseEntity.ok(updatedQuiz);
+    }
+    @DeleteMapping("/{quizId")
+    public ResponseEntity<Void> deleteQuiz(@PathVariable Long quizId)
 }
