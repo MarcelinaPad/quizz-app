@@ -11,6 +11,24 @@ public class User {
     private Long id;
     private String name;
     private String password;
+    private int score = 0;
+    private int streak = 0;
+
+    public int getStreak() {
+        return streak;
+    }
+
+    public void setStreak(int streak) {
+        this.streak = streak;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
 
     public Long getId() {
         return id;
