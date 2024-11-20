@@ -32,6 +32,7 @@ public class QuizService {
         quiz.setUser(currentUser);
 
         for (Question question : questions) {
+            question.setOwner(currentUser);
             question.setQuiz(quiz);
         }
 

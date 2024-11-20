@@ -20,6 +20,17 @@ public class Question {
     @ManyToOne
     @JoinColumn(name = "quiz_id", nullable = false)
     private Quiz quiz;
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private User owner;
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
 
     public Quiz getQuiz() {
         return quiz;
